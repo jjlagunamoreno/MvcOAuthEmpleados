@@ -43,8 +43,12 @@ public class ManagedController : Controller
             //EN ESTE EJEMPLO, ALMACENAMOS EL ID (PASSWORD)
             identity.AddClaim(new Claim
                 (ClaimTypes.NameIdentifier, model.Password));
+            //ALMACENAMOS EL TOKEN EN EL USUARIO
+            identity.AddClaim(new Claim
+                ("TOKEN", token));
             ClaimsPrincipal principal =
                 new ClaimsPrincipal(identity);
+
             //EL USUARIO ESTARA DADO DE ALTA 30 MINUTOS
             //, LO MISMO QUE SESSION 
             await HttpContext.SignInAsync
